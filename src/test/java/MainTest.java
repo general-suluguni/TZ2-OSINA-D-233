@@ -2,15 +2,10 @@ package test.java;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
-import java.util.Random;
-import java.util.Scanner;
-
 import org.junit.Test;
 import main.java.Main;
 public class MainTest {
@@ -111,15 +106,22 @@ public class MainTest {
             System.err.println("Ошибка при записи файла: " + ex.getMessage());
         }
         long t_start = System.currentTimeMillis();
-        Main.func("speed_test.txt");
+        String[] res = Main.func("speed_test.txt");
         long t_finish = System.currentTimeMillis();
         long time  = (t_finish - t_start);
         assertTrue(time >= 0);
-        assertEquals(-1, Main._min(numbers));
-        assertEquals(1, Main._max(numbers));
-        long sum = Long.valueOf(Main._sum(numbers));
-        long mult = Long.valueOf(Main._mult(numbers));
-        assertEquals(0, sum);
-        assertEquals(1, mult);
+        assertEquals(String.valueOf(-1), res[0]);
+        assertEquals(String.valueOf(1), res[1]);
+        assertEquals(String.valueOf(0), res[2]);
+        assertEquals(String.valueOf(1), res[3]);
         }
+
+    @Test
+    public void numfor_test() {
+        String[] res = Main.func("numfor_test.txt");
+        assertEquals(String.valueOf(-1732481180), res[0]);
+        assertEquals(String.valueOf(1827924947), res[1]);
+        assertEquals(String.valueOf(-2120727538), res[2]);
+        assertEquals("не_найдено", res[3]);
+    }
     }
