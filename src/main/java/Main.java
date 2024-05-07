@@ -11,7 +11,7 @@ public class Main {
         Scanner scan = new Scanner(System.in);
         System.out.println("Введите расположение файла: ");
         String inp_file_name = scan.next();
-        //вызов функции
+        func(inp_file_name);
     }
     public static void func(String inp_file_name) {
         try {
