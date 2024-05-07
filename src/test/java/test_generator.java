@@ -1,3 +1,5 @@
+package test.java;
+
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -5,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Main {
+public class test_generator {
     public static void main(String[] args) {
         ArrayList<Integer> numbers = new ArrayList<>();
         Random random = new Random();

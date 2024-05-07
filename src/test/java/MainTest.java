@@ -1,7 +1,16 @@
 package test.java;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Optional;
+import java.util.Random;
+import java.util.Scanner;
+
 import org.junit.Test;
 import main.java.Main;
 public class MainTest {
@@ -34,8 +43,12 @@ public class MainTest {
         for (int num : numlist) {
             numbers.add((long) num);
         }
-        long output = Main._sum(numbers);
-        assertEquals(777, output);
+        String output = Main._sum(numbers);
+        long res = -1;
+        if (! output.isEmpty()) {
+            res = Long.valueOf(output);
+        }
+        assertEquals(777, res);
     }
 
     @Test
@@ -45,8 +58,12 @@ public class MainTest {
         for (int num : numlist) {
             numbers.add((long) num);
         }
-        long output = Main._mult(numbers);
-        assertEquals(1500, output);
+        String output = Main._mult(numbers);
+        long res = -1;
+        if (! output.isEmpty()) {
+            res = Long.valueOf(output);
+        }
+        assertEquals(1500, res);
     }
 
     @Test
@@ -58,9 +75,51 @@ public class MainTest {
         }
         long outp_min = Main._min(numbers); // -99
         long outp_max = Main._max(numbers); // 5
-        long outp_sum = Main._sum(numbers); // -90
-        long outp_mult = Main._mult(numbers); // 0
-        long res = (outp_min - outp_sum) * outp_max + outp_mult;
+        String outp_sum = Main._sum(numbers); // -90
+        String outp_mult = Main._mult(numbers); // 0
+        long l_outp_sum = -1;
+        long l_outp_mult = -1;
+        if (! outp_sum.isEmpty()) {
+            l_outp_sum = Long.valueOf(outp_sum);
+        }
+        if (! outp_mult.isEmpty()) {
+            l_outp_mult = Long.valueOf(outp_mult);
+        }
+        long res = (outp_min - l_outp_sum) * outp_max + l_outp_mult;
         assertEquals(-45, res);
     }
-}
+
+    @Test
+    public void speed_test() {
+        ArrayList<Long> numbers = new ArrayList<>();
+        int len = 1_000_000;
+        for (int i = 0; i < len; i++) {
+            if (i % 2 == 0) {
+                numbers.add((long)1);
+            }
+            else {
+                numbers.add((long)-1);
+            }
+        }
+        String testfile_name = "speed_test.txt";
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(testfile_name))) {
+            for (Long num : numbers) {
+                writer.write(num.toString());
+                writer.write(" ");
+            }
+        } catch (IOException ex) {
+            System.err.println("Ошибка при записи файла: " + ex.getMessage());
+        }
+        long t_start = System.currentTimeMillis();
+        Main.func("speed_test.txt");
+        long t_finish = System.currentTimeMillis();
+        long time  = (t_finish - t_start);
+        assertTrue(time >= 0);
+        assertEquals(-1, Main._min(numbers));
+        assertEquals(1, Main._max(numbers));
+        long sum = Long.valueOf(Main._sum(numbers));
+        long mult = Long.valueOf(Main._mult(numbers));
+        assertEquals(0, sum);
+        assertEquals(1, mult);
+        }
+    }
