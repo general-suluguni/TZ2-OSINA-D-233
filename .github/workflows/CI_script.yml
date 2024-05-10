@@ -1,5 +1,6 @@
 name: Testing code
 on:
+  workflow_dispatch:
   push:
     branches: [master]
 
