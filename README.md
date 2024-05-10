@@ -1,5 +1,5 @@
 # Let. Me. Cook!
-![Status](https://github.com/general-suluguni/TZ2_MAIN_REPO/actions/workflows/CI_script.yml/badge.svg?branch=master)
+[![Status](https://github.com/general-suluguni/TZ2_MAIN_REPO/actions/workflows/CI_script.yml/badge.svg?branch=master)](https://github.com/general-suluguni/TZ2_MAIN_REPO/actions/workflows/CI_script.yml)
 
 1 балл: реализуйте функции чтения из файла, поиска минимального числа, поиска максимального числа, сложения и умножения всех чисел из файла >>>> В Main
 
