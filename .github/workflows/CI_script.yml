@@ -23,4 +23,4 @@ jobs:
           to: $ {{ secrets.TELEGRAM_CHAT_ID }}
           token: $ {{ secrets.TELEGRAM_BOT_TOKEN }}
           message: |
-          $ {{ job.status }}: Tests ${{ job.status == 'succes' && 'passed' || 'failed' }}.
+            $ {{ job.status }}: Tests ${{ job.status == 'succes' && 'passed' || 'failed' }}.
